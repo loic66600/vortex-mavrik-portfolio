@@ -1,0 +1,30 @@
+VORTEX — Animation du header pour un scroll aller-retour
+
+IMAGE DE DÉPART
+header-mavrik-higgsfield.png — 1860 × 845 pixels, sans texte.
+Conserver ce ratio si le modèle le permet. Sinon utiliser un cadre horizontal et préserver l’espace vide à gauche.
+
+PROMPT À UTILISER DANS HIGGSFIELD
+
+Use the uploaded image as the exact first frame and visual identity reference. Create a single continuous 6-second cinematic shot for a premium black-and-red motion design portfolio hero. Preserve the exact fictional character Mavrik, his face, hazel eyes without eyewear, short textured brown hair with faded sides, short trimmed brown beard, black shirt, red X-shaped brushstroke background and overall composition. The man stays on the right. Keep the left 43 percent dark, empty and unobstructed for website text.
+
+From the first frame to the final frame, perform a very slow, controlled camera push-in of approximately 8 percent with a subtle 3-degree lateral orbit. Create restrained depth parallax between the portrait and the red background strokes. The red strokes shift slightly in depth, with a soft moving red rim light along the hair and shoulder. Keep facial identity and body proportions completely stable. The subject remains composed and almost still, with only extremely subtle natural breathing.
+
+Use continuous linear progression, evenly distributed across the entire shot. No opening pause and no ending pause. No cuts, no scene transitions, no camera shake, no fast movement, no zoom snap, no new objects, no particles covering the subject, no flicker, no face morphing, no talking, no changing clothes, no glasses, no rotating head, no text, no logos, no signature. Keep the background black and red. This clip will be scrubbed forwards and backwards by website scrolling, so every intermediate frame must be stable and visually coherent. Do not add a ping-pong reversal inside the video: the website handles reverse playback when scrolling up.
+
+INTÉGRATION AU SITE
+
+1. Exporter le clip sans texte. Les titres et les boutons restent en HTML pour conserver leur netteté et la traduction français / anglais.
+2. Placer le fichier sous dist/assets/header-vortex.mp4 dans le projet.
+3. Dans dist/app.js, remplacer :
+   const HERO_VIDEO_URL = 'assets/header-mavrik-scroll.mp4';
+   par :
+   const HERO_VIDEO_URL = 'assets/header-vortex.mp4';
+4. Republier le site. La progression du défilement pilote déjà le temps de la vidéo dans les deux sens. L’image reste visible jusqu’au chargement de la vidéo.
+
+Une première vidéo a été générée avec MiniMax Hailuo 2.3 Fast et intégrée sous assets/header-mavrik-scroll.mp4. Le header reste fixé pendant le défilement et la vidéo avance ou recule selon le sens du scroll. Le prompt ci-dessus reste disponible pour une nouvelle prise éventuelle.
+
+Pour une lecture arrière plus fluide, un MP4 comportant des images clés fréquentes est préférable. Option de réencodage si FFmpeg est disponible :
+ffmpeg -i animation-higgsfield.mp4 -an -c:v libx264 -crf 20 -preset medium -pix_fmt yuv420p -g 12 -keyint_min 12 -sc_threshold 0 -movflags +faststart header-vortex.mp4
+
+Après intégration, vérifier la fluidité sur téléphone. Le mode de réduction des animations du navigateur est respecté par le site.
